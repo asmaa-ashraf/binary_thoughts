@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+	
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+function save(){
+	//localStorage.clear();
+for(i=1;i<10;i++){
+var item="d"+i;
+var parent=document.getElementById(item);
+var child;
+if(parent.hasChildNodes())
+ child=parent.firstChild.id;
+else
+	child="";
+localStorage.setItem(item,child);
+//alert(localStorage.getItem(item));
+}}
+function reload(){
+
+for(i=1;i<10;i++){
+var item="d"+i;
+var img=localStorage.getItem(item);
+if (img!=""){
+var child=document.getElementById(img);
+var parent=document.getElementById(item);
+parent.appendChild(child);}
+}}
+function refresh(){
+window.location.reload();
+}
+
+   </script></head>
+
+<style>
+#list{height:600px;width:106px;border:black 2px solid;overflow:scroll;float:left}
+#master{width:310px;height:406px;position:fixed;top:10px;left:510px}
+#m2{border:black 2px solid;width:306px;height:306px}
+div{background-color:white;height:102px;width:102px;position:relative;float:right;}
+#d2{float:right;position:relative;}
+</style>
+<body bgcolor="blue">
+<div id="list">
+<img src="ch1.jpg" draggable="true" ondragstart="drag(event)" id="i1" alt=""/>
+<img src="ch2.jpg" draggable="true" ondragstart="drag(event)" id="i2" alt=""/>
+<img src="ch3.jpg" draggable="true" ondragstart="drag(event)" id="i3" alt=""/>
+<img src="ch4.jpg" draggable="true" ondragstart="drag(event)" id="i4" alt=""/>
+<img src="ch5.jpg" draggable="true" ondragstart="drag(event)" id="i5" alt=""/>
+<img src="ch6.jpg" draggable="true" ondragstart="drag(event)" id="i6" alt=""/>
+<img src="ch7.jpg" draggable="true" ondragstart="drag(event)" id="i7" alt=""/>
+<img src="ch8.jpg" draggable="true" ondragstart="drag(event)" id="i8" alt=""/>
+<img src="ch9.jpg" draggable="true" ondragstart="drag(event)" id="i9" alt=""/>
+</div>
+<article id="master" >
+ <div id="m2">
+  <div id="d1"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d2"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d3"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d4"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d5"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d6"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d7"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d8"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+  <div id="d9"ondrop="drop(event)"
+   ondragover="allowDrop(event)"></div>
+ </div>
+ <button id="save" value="save" onclick="save()">Save</button>
+ <button id="refresh" onclick="refresh()">Refresh</button>
+ <button id="reload" onclick="reload()">Reload</button>
+</article>
+</body>
+</html>
